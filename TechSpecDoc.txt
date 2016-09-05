@@ -1,0 +1,36 @@
+Functional specification
+
+This issue consists in listing all candidate for the Rotterdam office. The list should be paginated.
+We want to display the following columns:
+
+Initial contact date
+Name - String
+Recruiter - String
+CV - Link to a CV (to be implemented later)
+Level - String
+Languages - String
+EU - Boolean
+First interview - Date
+Technical interview - Date
+Final interview - Date
+Start date - Date
+Note - String
+The default pagination shows 25 candidates per page. The list is sorted by Initial contact date.
+
+Roles and permissions
+
+There are no restrictions at this time and everyone can access the page and no login is required (yet).
+
+Technical specification
+
+The templates is already available in app/view/index.scala.html. It should be renamed to candidates.scala.html.
+
+The list of candidates is available at the following URL:
+GET /:office/candidates where :office is Rotterdam
+
+And with the pagination:
+
+GET /:office/candidates?size=20&page=1
+
+You should use play embedded database (h2) and the evolutions mechanism to populate data.
+The controller action should be implemented in the Application.scala file and should query the embedded database.
