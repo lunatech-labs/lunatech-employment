@@ -47,15 +47,16 @@
             <div class="row">
                 <div class="col-sm-3 col-md-2 sidebar">
                     <ul class="nav nav-sidebar">
-                        <li class="active"><a href="@controllers.routes.Application.main()">
+                        <li class="active"><a href="@controllers.routes.Application.listOfCandidate(0,"rotterdam")">
                             List candidates Rotterdam<span class="sr-only">(current)</span></a></li>
-                        <li><a href="#">List candidates Montévrain</a></li>
+                        <li><a href="@controllers.routes.Application.listOfCandidate(0,"paris")">List candidates Paris</a></li>
+
                         <li><a href="@controllers.routes.Application.editCandidate">New candidate</a></li>
 
                     </ul>
                     <ul class="nav nav-sidebar">
                         <li><a href="#">List recruiters Rotterdam</a></li>
-                        <li><a href="#">List recruiters Montévrain</a></li>
+                        <li><a href="#">List recruiters Paris</a></li>
                         <li><a href="#">Add recruiters</a></li>
                     </ul>
                     <ul class="nav nav-sidebar">

@@ -1,0 +1,111 @@
+@import models.Page
+@import models.PaginationBoundCalc
+@(currentPage: Page[(Candidate)], city: String)
+@****************************************
+* Helper generating navigation links *
+****************************************@
+@link(newPage: Int) = @{
+    routes.Application.listOfCandidate(newPage, city)
+}
+
+@main(s"Candidates $city") {
+
+
+    @Option(currentPage.items).filterNot(_.isEmpty).map { candidates =>
+
+
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <h1 class="page-header">Candidates @city.capitalize</h1>
+        <div class="sub-header"><a href=""></a>
+            Displaying @(currentPage.offset + 1) to @(currentPage.offset + candidates.size) of @currentPage.total candidates</div>
+
+        <nav>
+            <ul class="pagination">
+                @currentPage.prev.map { page =>
+                <li class="prev">
+                    <a href="@link(page)">&laquo; </a>
+                </li>
+                }.getOrElse {
+                    <li class="prev disabled">
+                        <a>&laquo; </a>
+                    </li>
+                }
+
+
+                @for(i <- PaginationBoundCalc.lowBound(currentPage) until currentPage.page) {
+                    <li><a target="_self" href="@routes.Application.listOfCandidate(i, city)"> @(i + 1)</a></li>
+                }
+
+                    <li class="active"><a target="_self" href="#">@(currentPage.page + 1)</a></li>
+
+                @for(i <- (currentPage.page + 1) to PaginationBoundCalc.highBound(currentPage)) {
+                    <li><a target="_self" href="@routes.Application.listOfCandidate(i, city)" > @(i + 1)</a></li>
+                }
+
+                @currentPage.next.map { page =>
+                <li class="next">
+                    <a href="@link(page)"> &raquo;</a>
+                </li>
+                }.getOrElse {
+                    <li class="next disabled">
+                        <a> &raquo;</a>
+                    </li>
+                }
+            </ul>
+        </nav>
+
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Initial contact date</th>
+                        <th>Name</th>
+                        <th>Recruiter</th>
+                        <th>CV</th>
+                        <th>Level</th>
+                        <th>Skill set</th>
+                        <th>Language</th>
+                        <th>Nationality</th>
+                        <th>First</th>
+                        <th>Technical</th>
+                        <th>Final</th>
+                        <th>Start date</th>
+                        <th>Note</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @candidates.map { candidate =>
+                    <tr>
+                        <td>@candidate.initialContactDate</td>
+                        <td><a>@candidate.firstName.capitalize @candidate.lastName.capitalize</a></td>
+                        <td>@candidate.recruiter</td>
+                        <td><a>@candidate.cv</a></td>
+                        <td>@candidate.level</td>
+                        <td>@candidate.skillSet</td>
+                        <td>@candidate.language</td>
+                        <td>@candidate.nationality.capitalize</td>
+                        <td>@candidate.first</td>
+                        <td>@candidate.second</td>
+                        <td>@candidate.third</td>
+                        <td>@candidate.startdate</td>
+                        <td>@candidate.notes</td>
+                    </tr>
+                }
+
+                </tbody>
+            </table>
+
+        </div>
+
+
+    }.getOrElse {
+
+        <div class="well">
+            <em>Nothing to display</em>
+        </div>
+
+    }
+</div>
+
+}
+

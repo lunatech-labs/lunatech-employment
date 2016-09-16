@@ -1,7 +1,0 @@
-@(interviewResult: InterviewResult)
-
-@{interviewResult match { case Undefined(d) => <span style="color: black" class="glyphicon glyphicon-question-sign" aria-hidden="true"> @d.toString </span>
-case Passed(d) => <span style="color: green" class="glyphicon glyphicon-ok" aria-hidden="true"> </span>
-case Failed(d,r) => <span style="color: red" class="glyphicon glyphicon-remove" aria-hidden="true"> </span>
-case _ => <span style="color: black" class="glyphicon glyphicon-question-sign" aria-hidden="true"> </span>
-}}
