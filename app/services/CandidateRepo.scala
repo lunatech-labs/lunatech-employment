@@ -115,3 +115,4 @@ class CandidateRepo @Inject()(protected val dbConfigProvider: DatabaseConfigProv
     } yield Page(result, page, offset, totalRows)
 
   }
+}
